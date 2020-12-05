@@ -45,13 +45,13 @@ using Optim
 "Threshold for stable input signal (unit g)."
 const stable_th = 0.2
 
-"Threshold for separation between calibration points (uint g))."
+"Threshold for separation between calibration points (unit g))."
 const cal_th = 0.4
 
 "Averaging window size."
 const window_size = 10
 
-"Time limit for calibration update (uint s)."
+"Time limit for calibration update (unit s)."
 const default_time_limit = 1/10
 
 
@@ -63,7 +63,7 @@ A sliding window is used to find periods of stable input (sensor not moving).
 A cloud of points measured at different sensor orientations is used to
 estimate (x,y,z) zero offset and scaling error.
 
-Points are expected to have mangnitude ~1g, so the calibration paramters
+Points are expected to have magnitude ~1g, so the calibration parameters
 are chosen to minimise: `sum((1 - hypot(x, y, z))^2 for (x, y, z) in points`.
 
 See [`evaluate_point`](@ref)
@@ -144,7 +144,7 @@ end
 
 
 """
-Find rotation that best alings multiple channels.
+Find rotation that best aligns multiple channels.
 """
 function calibrate_rotation!(cals; time_limit=cals[1].time_limit)
 
