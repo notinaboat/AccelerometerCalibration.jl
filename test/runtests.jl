@@ -1,7 +1,6 @@
 using Test
 using AccelerometerCalibration
-using AccelerometerCalibration: Calibration, calibrate!, update_calibration!,
-                                calibrate_rotation!
+using AccelerometerCalibration: Calibration, calibrate!, update_calibration!
 using Serialization
 using Plots
 using Distributed
