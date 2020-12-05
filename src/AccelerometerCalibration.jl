@@ -93,9 +93,9 @@ Base.length(c::Calibration) = length(c.points)
 function Base.empty!(c::Calibration)
     empty!(c.window)
     empty!(c.points)
-    empty!(c.points)
     c.offset = zeros(3)
     c.scale = ones(3)
+    c.rotation = one(RotXY)
 end
 
 function Base.push!(c::Calibration, p)
