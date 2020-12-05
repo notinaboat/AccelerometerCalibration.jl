@@ -103,7 +103,7 @@ function Base.push!(c::Calibration, p)
     if length(c.points) > 2
         calibrate!(c)
     end
-    nothing
+    return c
 end
 
 
