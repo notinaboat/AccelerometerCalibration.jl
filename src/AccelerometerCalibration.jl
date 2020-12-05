@@ -96,6 +96,7 @@ function Base.empty!(c::Calibration)
     c.offset = zeros(3)
     c.scale = ones(3)
     c.rotation = one(RotXY)
+    return c
 end
 
 function Base.push!(c::Calibration, p)
