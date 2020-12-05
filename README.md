@@ -2,8 +2,6 @@
 
 Uses [Optim.jl](https://github.com/JuliaNLSolvers/Optim.jl) to fit calibration parameters (offset, scale, rotation) to a stream of accelerometer data.
 
-See also: [AccelerometerCalibrationPlots.jl](../AccelerometerCalibrationPlots.jl)
-
 ## Examples
 
 Single channel:
