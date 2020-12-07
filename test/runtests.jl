@@ -3,10 +3,9 @@ using AccelerometerCalibration
 using AccelerometerCalibration: Calibration, calibrate!, update_calibration!
 using Serialization
 using Plots
-using Distributed
 using AccelerometerCalibrationPlots
 
-#@testset "AccelerometerCalibration" begin
+@testset "AccelerometerCalibration" begin
 
     # Load raw acceleromter recording...
     raw_points = deserialize("raw_points.serialized")
@@ -40,4 +39,4 @@ using AccelerometerCalibrationPlots
     end
 
     gif(anim, "plot.gif", fps=5)
-#end
+end
