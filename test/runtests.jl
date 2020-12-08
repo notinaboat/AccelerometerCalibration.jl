@@ -1,6 +1,7 @@
 using Test
 using AccelerometerCalibration
 using AccelerometerCalibration: Calibration, calibrate!, update_calibration!
+using AccelerometerCalibration: calibrate_rotation!
 using Serialization
 using Plots
 using AccelerometerCalibrationPlots
@@ -37,6 +38,20 @@ using AccelerometerCalibrationPlots
         @show err
         @test err < 0.02
     end
+
+    # Calibrate again without time limit
+    for cal in cal_v
+        calibrate!(cal, time_limit=Inf)
+    end
+    calibrate_rotation!(cal_v, time_limit=Inf)
+    for cal in cal_v
+        err = cal_error(cal)
+        @show err
+        @test err < 0.02
+    end
+
+    AccelerometerCalibrationPlots.calplot(cal_v)
+    frame(anim)
 
     gif(anim, "plot.gif", fps=5)
 end

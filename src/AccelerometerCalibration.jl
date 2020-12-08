@@ -127,8 +127,8 @@ function calibrate!(cal; time_limit=cal.time_limit)
     p[p_scale] = cal.scale
 
     # Function to minimize.
-    f = p->sum((1 - hypot(((v .* p[p_scale]) - p[p_offset])...))^2
-              for v in cal.points)
+    err = (v, p) -> 1 - mapreduce(x->x^2, +, (v .* p[p_scale]) - p[p_offset])
+    f = p->sum(err(v, p)^2 for v in cal.points)
 
     # Run optimisation.
     r = optimize(f, p, ParticleSwarm(lower,upper,10),
@@ -164,8 +164,9 @@ function calibrate_rotation!(cals; time_limit=cals[1].time_limit)
         cal_points = [((p .* c.scale) - c.offset) for p in c.points]
 
         # Function to minimize.
-        err = (i, p) -> target_points[i] - (RotXYZ(p...) * cal_points[i])
-        f = (p) -> mapreduce(x->x^2, +, vcat((err(i, p) for i in 1:l)...))
+        err = (i, p) -> (mapreduce(x->x^2, +,
+                         target_points[i] - (RotXYZ(p...) * cal_points[i])))
+        f = (p) -> sum(err(i, p) for i in 1:l)
 
         # Run optimisation.
         r = optimize(f, p, ParticleSwarm(lower,upper,3),
